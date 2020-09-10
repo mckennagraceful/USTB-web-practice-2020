@@ -4,7 +4,7 @@
 		<view class="title">输入手机号码</view>
 		<input class="uni-input" placeholder="请输入手机号码" v-model="mobile" />
 		<view class="title">输入验证码</view>
-		<input class="uni-input" placeholder="请输入验证码" v-model="randomCode"/>
+		<input class="uni-input" placeholder="请输入验证码" v-model="randomCode" />
 		<button type="default" @tap="sendMsg">发送验证码</button>
 	</view>
 </template>
@@ -13,7 +13,7 @@
 	export default {
 		data() {
 			return {
-                mobile: '',
+				mobile: '',
 				randomCode: ''
 			}
 		},
@@ -21,7 +21,7 @@
 			sendMsg() {
 				// promise方式
 				uniCloud.callFunction({
-						name: 'sendValiCode',
+						name: 'sendValidateMessage',
 						data: {
 							mobile: this.mobile,
 							randomCode: this.randomCode

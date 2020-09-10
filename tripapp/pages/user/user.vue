@@ -13,9 +13,13 @@
 				<text class="list-text">帐号管理</text>
 				<text class="navigat-arrow">&#xe65e;</text>
 			</view>
-			<view class="center-list-item" @tap="goToSendMsgCase">
+			<view class="center-list-item" @tap="goToSendMsg">
 				<text class="list-icon">&#xe639;</text>
-				<text class="list-text">手机发送验证码案例</text>				
+				<text class="list-text">手机发送验证码案例</text>
+			</view>
+			<view class="center-list-item" @tap="CallApiCase">
+				<text class="list-icon">&#xe639;</text>
+				<text class="list-text">调用RestFul Api案例</text>
 			</view>
 		</view>
 		<view class="center-list">
@@ -49,25 +53,30 @@
 			}
 		},
 		methods: {
-			goLogin() {
+			goLogin:function() {
 				if (!this.login) {
 					console.log("点击前往登录")
+					//页面的跳转
 					uni.navigateTo({
-						url:'../login/login'
+						url: "../login/login"
 					})
 				}
 			},
-			goToSendMsgCase(){
-				//页面的跳转。
+			goToSendMsg: function() {
 				uni.navigateTo({
-					url:'../case/msg'  //跳转到用户登录页面
+					url: '../case/msg'
+				});
+			},
+			CallApiCase:function(){
+				//页面的跳转
+				uni.navigateTo({
+					url:'../case/api'
 				})
 			},
-			
-			initApp:function(){
+			initApp: function() {
 				uni.showModal({
 					title: '确定要初始化系统吗?',
-					content: '初始化系统会清除所有缓存数据并且重启？',
+					content: '初始化系统会清除所有缓存数据并且重启',
 					success: function(res) {
 						if (res.confirm) {
 							console.log('用户点击确定');
@@ -77,7 +86,7 @@
 							uni.showToast({
 								icon: 'none',
 								duration: 3000,
-								title: '清除成功1秒后重启'
+								title: '清除成功 1秒后重启'
 							});
 							setTimeout(function() {
 								uni.hideToast();
