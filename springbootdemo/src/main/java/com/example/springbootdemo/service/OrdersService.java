@@ -14,4 +14,8 @@ public interface OrdersService {
     public List<Orders> queryAllOrder();
     //支付订单
     public Orders payOrder(int oid);
+    //计算总金额
+    public int settle();
+    //全部结算
+    public void allSettle();
 }

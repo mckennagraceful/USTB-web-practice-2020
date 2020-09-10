@@ -30,13 +30,15 @@
 					<image v-on:click="all_orders_6_6_click(item_orders)" src="/static/all_orders/images/all_orders_6_8.jpg" mode="scaleToFill"
 					 border="0" class="all_orders_6" v-if="!item_orders.isPaid"></image>
 					<image v-on:click="all_orders_6_6_click(item_orders)" src="/static/all_orders/images/all_orders_6_7.jpg" mode="scaleToFill"
-					  border="0" class="all_orders_6" v-else></image>
+					 border="0" class="all_orders_6" v-else></image>
 					<button class="deleteButton" @click="deleteOrder(item_orders.oid)">删除</button>
 				</view>
 			</view>
 		</view>
-
-		
+		<view class="totalPrice">
+			<text decode="true" class="total">合计待支付：¥{{total}}</text>
+			<button class="totalButton" @click="allSettle">一键结算</button>
+		</view>
 		<view class="loading">{{loadingText}}</view>
 		<view class="ymBbottom"></view>
 	</view>
@@ -57,12 +59,32 @@
 		margin-right: 10rpx;
 		float: right;
 	}
+
 	.payButton {
 		display: inline-block;
 		float: right;
 		font-size: 24rpx;
 	}
-	.orders{
-		height: 80%;
+
+	.totalPrice {
+		height: 100px;
+		width: 100%;
+		background-color: #ffffff;
+		position: fixed;
+		bottom: 0;
+		border:0.05px solid #e7e7e7;
+	}
+	.total{
+		font-size: 28rpx;
+		margin-left: 50rpx;
+		margin-top: 10rpx;
+		line-height:46px;
+	}
+	.totalButton{
+		display: inline-block;
+		float: right;
+		font-size: 28rpx;
+		margin-right: 60rpx;
+		margin-top: 10rpx;
 	}
 </style>

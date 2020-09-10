@@ -7,6 +7,7 @@ var _self, page = 1,
 export default {
 	data() {
 		return {
+			total:0,
 			loadingText: '',
 			list_orders: [],
 			page: 0, //当前分页页码
@@ -44,7 +45,7 @@ export default {
 		uni.request({
 			url: 'http://l7g02ivr.xiaomy.net:48361/moon/orders/data',
 			data: {
-
+				
 			},
 			method: 'GET',
 			success: (res) => {
@@ -53,12 +54,44 @@ export default {
 				console.log(this.list_orders);
 			}
 		})
+		console.log("开始核算总金额...");
+		uni.request({
+			url: 'http://l7g02ivr.xiaomy.net:48361/moon/orders/total',
+			data: {
+				
+			},
+			method: 'GET',
+			success: (res) => {
+				console.log(res);
+				this.total=res.data.data;
+			}
+		})
 	},
 	onPullDownRefresh: function() {
 		//下拉刷新的时候请求一次数据
 		this.Refresh();
 	},
 	methods: {
+		allSettle:function(){
+			uni.request({
+				url: 'http://l7g02ivr.xiaomy.net:48361/moon/orders/allSettle',
+				data: {
+			
+				},
+				method: 'PUT',
+				success: (res) => {
+					console.log(res);
+					uni.showToast({
+						icon: 'none',
+						position: 'bottom',
+						title: '您已成功支付¥'+this.total+'!'
+					});
+					setTimeout(function() {
+						location.reload();
+					}, 1000)
+				}
+			})
+		},
 		pay: function(oid,price) {
 			console.log(oid);
 			uni.request({

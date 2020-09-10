@@ -73,4 +73,17 @@ public class OrdersController {
         result.put("msg","paySuccess");
         return result;
     }
+    @GetMapping("total")
+    public Map<String,Object> settle(){
+        Map<String,Object> result=new HashMap<String, Object>();
+        int total=ordersService.settle();
+        result.put("code",200);
+        result.put("data",total);
+        result.put("msg","settleSuccess");
+        return result;
+    }
+    @PutMapping("allSettle")
+    public void allSettle(){
+        ordersService.allSettle();
+    }
 }

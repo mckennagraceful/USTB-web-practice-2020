@@ -54,4 +54,30 @@ public class OrdersServiceImpl implements OrdersService {
         ordersRepository.updateById(tmp_order);
         return ordersRepository.selectById(tmp_order.getOid());
     }
+
+    @Override
+    public int settle() {
+        int total=0;
+        Orders tmp=new Orders();
+        List<Orders> allOrders=ordersRepository.selectList(null);
+        for(int i=0;i<allOrders.size();i++){
+            tmp= allOrders.get(i);
+            if(tmp.getIsPaid()==0){
+                total+=tmp.getPrice();
+            }
+        }
+        return total;
+    }
+
+    @Override
+    public void allSettle() {
+        Orders tmp=new Orders();
+        List<Orders> allOrders=ordersRepository.selectList(null);
+        for(int i=0;i<allOrders.size();i++){
+            tmp= allOrders.get(i);
+            if(tmp.getIsPaid()==0){
+                payOrder(tmp.getOid());
+            }
+        }
+    }
 }
